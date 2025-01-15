@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
   init_processor(&proc);
   init_memory(&mem);
 
-  // Load program from stdin (check to make sure it's not empty)
+  // Load program from stdin (and check to make sure it's not empty)
 
   // Execute the program
 

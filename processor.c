@@ -7,12 +7,12 @@ void init_processor(Processor *proc) {
   proc->z_flag = proc->n_flag = proc->o_flag = 0;
 }
 
-/* update_flags */
+void update_flags(Processor *proc, int16_t result);
 
-/* execute_instruction */
+void execute_instruction(Processor *proc, Memory *mem);
 
 void execute_program(Processor *proc, Memory *mem) {
   while (1) {
-    /* execute_instruction(proc, mem); */
+    execute_instruction(proc, mem);
   }
 }

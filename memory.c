@@ -6,12 +6,12 @@ void init_memory(Memory *mem) {
   }
 }
 
-/* fetch_byte */
+uint8_t fetch_byte(Memory *mem, uint16_t address);
 
-/* fetch_word */
+uint16_t fetch_word(Memory *mem, uint16_t address);
 
-/* store_byte */
+void store_byte(Memory *mem, uint16_t address, uint8_t value);
 
-/* store_word */
+void store_word(Memory *mem, uint16_t address, uint8_t value);
 
-/* load_program */
+int load_program(Memory *mem, FILE *input);

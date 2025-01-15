@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* 80d201 opcodes */
+/* Opcodes */
 #define HALT 0x31
 #define LOAD 0x60
 #define LOADI 0x61
@@ -26,7 +26,7 @@
 #define OUTI 0x70
 #define OUTIC 0x71
 
-/* 80d201 registers */
+/* Registers */
 #define A1 3
 #define A2 2
 #define R1 1
@@ -86,6 +86,14 @@ int load_program(Memory *mem, FILE *input);
  * mem - pointer to memory state
  */
 void execute_program(Processor *proc, Memory *mem);
+
+/*
+ * Core instruction execution
+ * Fetches opcode and registers from memory
+ * proc - pointer to processor state
+ * mem - pointer to memory state
+ */
+void execute_instruction(Processor *proc, Memory *mem);
 
 /*
  * Read a single byte from memory
