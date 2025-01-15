@@ -3,15 +3,15 @@
         JMP start       # Input to be placed as DATA at label input.
         JMP start       # P. Rudnicki, November 4, 1998
         JMP start       #
-start   LOAD A1,input   
+start   LOAD A1,input
         LOADI R1,A1
         JMPZ zero
         JMPN negat
         JMP pr_head
-begin   LOAD A1,input 
+begin   LOAD A1,input
         LOADI R1,A1
-        LOAD A2,fact  
-        LOADI R2,A2     
+        LOAD A2,fact
+        LOADI R2,A2
         JMP contin      # check whether R2 is a factor of input
 contin  SUBR R1,R2
         JMPN incfact    # try next factor 
@@ -19,7 +19,7 @@ contin  SUBR R1,R2
         LOAD A1,fact
         LOADI R1,A1
         ADDR R2,R1
-        JMPO incfact    # 
+        JMPO incfact    #
         LOAD A1,input
         LOADI R1,A1
         JMP contin
