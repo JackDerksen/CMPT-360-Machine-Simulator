@@ -5,3 +5,13 @@ void init_memory(Memory *mem) {
     mem->data[i] = 0;
   }
 }
+
+/* fetch_byte */
+
+/* fetch_word */
+
+/* store_byte */
+
+/* store_word */
+
+/* load_program */

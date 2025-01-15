@@ -6,3 +6,13 @@ void init_processor(Processor *proc) {
   proc->pc = 0;
   proc->z_flag = proc->n_flag = proc->o_flag = 0;
 }
+
+/* update_flags */
+
+/* execute_instruction */
+
+void execute_program(Processor *proc, Memory *mem) {
+  while (1) {
+    /* execute_instruction(proc, mem); */
+  }
+}
