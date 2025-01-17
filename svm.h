@@ -88,10 +88,10 @@ int load_program(Memory *mem, FILE *input);
 void execute_program(Processor *proc, Memory *mem);
 
 /*
- * Core instruction execution
- * Fetches opcode and registers from memory
- * proc - pointer to processor state
- * mem - pointer to memory state
+ * Execute a single instruction
+ * Fetches, decodes, and executes one instruction from memory
+ * proc - pointer to processor structure
+ * mem - pointer to memory structure
  */
 void execute_instruction(Processor *proc, Memory *mem);
 
