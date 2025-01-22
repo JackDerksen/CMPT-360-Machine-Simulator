@@ -2,7 +2,8 @@
 
 ## TODO:
 
-- [ ] Clean up debug statements
+- [x] Clean up debug statements
+- [ ] Clean up the code, make sure it's documented well
 
 ## Code organization
 

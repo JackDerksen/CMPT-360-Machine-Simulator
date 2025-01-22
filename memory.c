@@ -109,15 +109,11 @@ int load_program(Memory *mem, FILE *input) {
   int c;
 
   address = 0;
-  fprintf(stderr, "DEBUG: Loading program:\n");
 
   while ((c = fgetc(input)) != EOF && address < MEMORY_SIZE) {
     mem->data[address] = (uint8_t)c;
-    fprintf(stderr, "DEBUG: mem[0x%04x] = 0x%02x\n", address, (uint8_t)c);
     address++;
   }
-
-  fprintf(stderr, "\nDEBUG: Program loaded, size = %d bytes\n", address);
 
   /* Make sure the program isn't too large for memory */
   if (address >= MEMORY_SIZE) {

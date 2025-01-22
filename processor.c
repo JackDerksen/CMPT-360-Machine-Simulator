@@ -62,12 +62,6 @@ void execute_instruction(Processor *proc, Memory *mem) {
   uint16_t immediate;
   int16_t old_value;
 
-  /* DEBUG */
-  fprintf(
-      stderr,
-      "DEBUG: PC=0x%04x, Opcode=0x%02x, reg_byte=0x%02x (reg1=%d, reg2=%d)\n",
-      curr_pc, opcode, reg_byte, reg1, reg2);
-
   /* Update PC for next instruction based on instruction type */
   switch (opcode) {
   case LOAD:
@@ -117,15 +111,10 @@ void execute_instruction(Processor *proc, Memory *mem) {
       exit(1);
     }
     uint16_t addr = proc->addr_reg[reg2 - 2];
-    fprintf(stderr, "DEBUG: LOADI: reading from address 0x%04x\n", addr);
     if (reg1 <= 1) {
       proc->data_reg[reg1] = fetch_word(mem, addr);
-      fprintf(stderr, "DEBUG: LOADI: loaded value=0x%04x to data_reg[%d]\n",
-              proc->data_reg[reg1], reg1);
     } else {
       proc->addr_reg[reg1 - 2] = fetch_word(mem, addr);
-      fprintf(stderr, "DEBUG: LOADI: loaded value=0x%04x to addr_reg[%d]\n",
-              proc->addr_reg[reg1 - 2], reg1 - 2);
     }
     update_flags(proc, proc->data_reg[reg1]);
     break;
