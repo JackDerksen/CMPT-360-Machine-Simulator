@@ -1,5 +1,9 @@
 # Notes
 
+## TODO:
+
+- [ ] Clean up debug statements
+
 ## Code organization
 
 - svm.h: Contains all definitions and declarations
@@ -8,31 +12,12 @@
 - main.c: Program entry point
 
 
-## Current features
+## To run the program:
 
-- 16-bit processor with 2 data registers and 2 address registers
-- Program counter and status flags (Z, N, O)
-- 32KB memory (MEMORY_SIZE = 32768 bytes)
-- Support for all basic instructions defined in the spec
-- Memory bounds checking
-- Error handling for invalid operations
+1. Build the program: `make all`
 
+2. Create a binary file from Test1.svm: `cat Test1.svm | ./sasm > test1.bin`
 
-## To build and run the program:
+3. Run the binary with your simulator: `cat test1.bin | ./svm`
 
-1. Run `make` to build
-2. Run `cat program.bin | ./svm` to execute a program
-
-
-## Still need to:
-- [ ] Correct execute_instruction doc comment in header file
-- [ ] Finish implementing the core functions (already prototyped)
-- [ ] Add the instruction implementations in processor.c
-- [ ] Enhance error checking and validation
-- [ ] Make sure all this stuff coincides with the "design issues" section of the doc
-
-
-## *Should*...
-- [ ] Add more detailed documentation
-- [ ] Implement unit tests
-- [ ] Add debugging output capabilities
+4. Or all in one line: `cat Test1.svm | ./sasm | ./svm`

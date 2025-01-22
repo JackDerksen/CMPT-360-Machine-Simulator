@@ -129,7 +129,7 @@ void store_byte(Memory *mem, uint16_t address, uint8_t value);
  * address - memory address to write (0-32766)
  * value - 16-bit word to write
  */
-void store_word(Memory *mem, uint16_t address, uint8_t value);
+void store_word(Memory *mem, uint16_t address, int16_t value);
 
 /*
  * Update processor flags based on operation result
