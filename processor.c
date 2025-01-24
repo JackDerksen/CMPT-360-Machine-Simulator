@@ -50,10 +50,23 @@ static int is_valid_opcode(uint8_t opcode) {
 static int is_valid_register(uint8_t reg) { return reg >= 0 && reg <= 3; }
 
 /*
- * Enormous function which executes a single instruction
- * Fetches, decodes and executes one instruction
- * proc - Pointer ot the processor structure
- * mem - Pointer to the memory structure
+ * Enormous function to execute a single instruction from memory
+ *
+ * Process:
+ * 1. Fetch opcode and register byte from current PC
+ * 2. Extract register numbers from register byte
+ * 3. Update PC based on instruction length
+ * 4. Validate opcode and register numbers
+ * 5. Execute instruction-specific logic
+ * 6. Update processor flags where appropriate
+ *
+ * proc - Pointer to processor structure containing CPU state
+ * mem - Pointer to memory structure
+ *
+ * Error handling:
+ * - Exits on invalid opcode
+ * - Exits on invalid register numbers
+ * - Exits on memory access violations
  */
 void execute_instruction(Processor *proc, Memory *mem) {
   uint16_t curr_pc = proc->pc;
