@@ -2,13 +2,26 @@
 
 ---
 
-### Code organization
+## Overview
+This project implements a virtual machine simulator for the fictional StunTel 80d201 processor. The simulator executes binary machine code that can be generated from assembly using the provided `sasm` assembler.
+
+
+## Architecture
+The simulator implements a 16-bit processor with:
+- 2 data registers (R1, R2)
+- 2 address registers (A1, A2)  
+- Program counter (PC)
+- Status flags (Z, N, O)
+- 32KB memory space (byte-addressable)
+
+
+## Code organization
 
 - *svm.h*: Contains all definitions and declarations
 - *processor.c*: Handles instruction execution and processor state
 - *memory.c*: Manages memory access and program loading
 - *main.c*: Program entry point
-- *sasm*: Assembler executable for the svm code
+
 
 ### Example Test Code (test.svm)
 
@@ -42,3 +55,22 @@ RESULT   DATA  0
 3. Run the binary with the simulator: `cat test.bin | ./svm`
 4. Or all in one line: `cat test.svm | ./sasm | ./svm`
 
+
+## Implementation Notes
+
+- Memory is byte-addressable with 32KB total space
+- Instructions are either 2 or 4 bytes long
+- Register encoding uses 2 bits for each register in instruction byte
+- Proper bounds checking implemented for all memory access
+- Status flags updated after arithmetic and memory operations
+- Error detection for invalid opcodes and register numbers
+
+
+### Error Handling
+
+The simulator detects and reports:
+
+- Invalid opcodes
+- Invalid register numbers
+- Memory access violations
+- Basic format validation
