@@ -1,24 +1,20 @@
-# Notes
+# CMPT 360 Machine Simulator
 
-## TODO:
+## Jack Derksen 3121038
 
-- [x] Clean up debug statements
-- [ ] Clean up the code, make sure it's documented well
+---
 
-## Code organization
+### Code organization
 
-- svm.h: Contains all definitions and declarations
-- processor.c: Handles instruction execution and processor state
-- memory.c: Manages memory access and program loading
-- main.c: Program entry point
+- *svm.h*: Contains all definitions and declarations
+- *processor.c*: Handles instruction execution and processor state
+- *memory.c*: Manages memory access and program loading
+- *main.c*: Program entry point
 
 
-## To run the program:
+### To run the program:
 
-1. Build the program: `make all`
-
+1. Build the program: `make all` (`make clean` to clean)
 2. Create a binary file from Test1.svm: `cat Test1.svm | ./sasm > test1.bin`
-
-3. Run the binary with your simulator: `cat test1.bin | ./svm`
-
+3. Run the binary with the simulator: `cat test1.bin | ./svm`
 4. Or all in one line: `cat Test1.svm | ./sasm | ./svm`

@@ -32,7 +32,9 @@
 #define R1 1
 #define R2 0
 
+/* Maximum memory and opcode sizes */
 #define MEMORY_SIZE 32768
+#define MAX_OPCODE 0x71
 
 /*
  * Processor structure - represents the state of the 80d201 CPU
@@ -59,56 +61,56 @@ typedef struct {
 /*
  * Initialize processor state
  * Sets all registers to 0, clears flags, sets PC to 0
- * proc - pointer to processor structure to initialize
+ * proc - Pointer to processor structure to initialize
  */
 void init_processor(Processor *proc);
 
 /*
  * Initialize memory state
  * Sets all memory locations to 0
- * mem - pointer to memory structure to initialize
+ * mem - Pointer to memory structure to initialize
  */
 void init_memory(Memory *mem);
 
 /*
  * Load program from input stream into memory
  * Reads binary data starting at memory address 0
- * mem - pointer to memory structure
- * input - file pointer to read from (typically stdin)
- * Returns: number of bytes loaded or -1 on error
+ * mem - Pointer to memory structure
+ * input - File pointer to read from (typically stdin)
+ * Returns: Number of bytes loaded or -1 on error
  */
 int load_program(Memory *mem, FILE *input);
 
 /*
  * Main execution loop
  * Fetches and executes instructions until HALT or error
- * proc - pointer to processor state
- * mem - pointer to memory state
+ * proc - Pointer to processor state
+ * mem - Pointer to memory state
  */
 void execute_program(Processor *proc, Memory *mem);
 
 /*
  * Execute a single instruction
  * Fetches, decodes, and executes one instruction from memory
- * proc - pointer to processor structure
- * mem - pointer to memory structure
+ * proc - Pointer to processor structure
+ * mem - Pointer to memory structure
  */
 void execute_instruction(Processor *proc, Memory *mem);
 
 /*
  * Read a single byte from memory
  * Includes bounds checking for memory access
- * mem - pointer to memory structure
- * address - memory address to read (0-32767)
- * Returns: byte value at specified address
+ * mem - Pointer to memory structure
+ * address - Memory address to read (0-32767)
+ * Returns: Byte value at specified address
  */
 uint8_t fetch_byte(Memory *mem, uint16_t address);
 
 /*
  * Read a 16-bit word from memory
  * Reads two consecutive bytes and combines them
- * mem - pointer to memory structure
- * address - memory address to read (0-32766)
+ * mem - Pointer to memory structure
+ * address - Memory address to read (0-32766)
  * Returns: 16-bit word value at specified address
  */
 uint16_t fetch_word(Memory *mem, uint16_t address);
@@ -116,9 +118,9 @@ uint16_t fetch_word(Memory *mem, uint16_t address);
 /*
  * Write a single byte to memory
  * Includes bounds checking for memory access
- * mem - pointer to memory structure
- * address - memory address to write (0-32767)
- * value - byte value to write
+ * mem - Pointer to memory structure
+ * address - Memory address to write (0-32767)
+ * value - Byte value to write
  */
 void store_byte(Memory *mem, uint16_t address, uint8_t value);
 
@@ -136,8 +138,8 @@ void store_word(Memory *mem, uint16_t address, int16_t value);
  * Sets Zero flag if result is 0
  * Sets Negative flag if result is negative
  * Sets Overflow flag if arithmetic overflow occurred
- * proc - pointer to processor structure
- * result - result value to check
+ * proc - Pointer to processor structure
+ * result - Result value to check
  */
 void update_flags(Processor *proc, int16_t result);
 

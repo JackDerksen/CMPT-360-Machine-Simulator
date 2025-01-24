@@ -2,12 +2,11 @@
 
 /*
  * Initialize all memory locations to zero
- * mem - pointer to memory structure to initialize
+ * mem - Pointer to memory structure to initialize
  */
 void init_memory(Memory *mem) {
   int i;
 
-  /* Using C89 style loop with declaration outside */
   for (i = 0; i < MEMORY_SIZE; i++) {
     mem->data[i] = 0;
   }
@@ -16,8 +15,8 @@ void init_memory(Memory *mem) {
 /*
  * Read a single byte from memory with bounds checking
  * mem - pointer to memory structure
- * address - memory location to read (0-32767)
- * Returns: byte value at specified address
+ * address - Memory location to read (0-32767)
+ * Returns: Byte value at specified address
  * Note: Exits program if address is out of bounds
  */
 uint8_t fetch_byte(Memory *mem, uint16_t address) {
@@ -33,8 +32,8 @@ uint8_t fetch_byte(Memory *mem, uint16_t address) {
 /*
  * Read a 16-bit word from memory with bounds checking
  * Reads two consecutive bytes and combines them (big-endian)
- * mem - pointer to memory structure
- * address - memory location to read (0-32766)
+ * mem - Pointer to memory structure
+ * address - Memory location to read (0-32766)
  * Returns: 16-bit word value composed of bytes at address and address+1
  * Note: Exits program if address or address+1 is out of bounds
  */
@@ -59,9 +58,9 @@ uint16_t fetch_word(Memory *mem, uint16_t address) {
 
 /*
  * Write a single byte to memory with bounds checking
- * mem - pointer to memory structure
- * address - memory location to write (0-32767)
- * value - byte value to write
+ * mem - Pointer to memory structure
+ * address - Memory location to write (0-32767)
+ * value - Byte value to write
  * Note: Exits program if address is out of bounds
  */
 void store_byte(Memory *mem, uint16_t address, uint8_t value) {
@@ -77,8 +76,8 @@ void store_byte(Memory *mem, uint16_t address, uint8_t value) {
 /*
  * Write a 16-bit word to memory with bounds checking
  * Splits word into two bytes and writes them consecutively (big-endian)
- * mem - pointer to memory structure
- * address - memory location to write (0-32766)
+ * mem - Pointer to memory structure
+ * address - Memory location to write (0-32766)
  * value - 16-bit word to write
  * Note: Exits program if address or address+1 is out of bounds
  */
@@ -100,9 +99,9 @@ void store_word(Memory *mem, uint16_t address, int16_t value) {
 /*
  * Load program from input file into memory
  * Reads binary data from input and stores at start of memory
- * mem - pointer to memory structure
- * input - file pointer to read from (typically stdin)
- * Returns: number of bytes loaded, or -1 if program too large
+ * mem - Pointer to memory structure
+ * input - File pointer to read from (typically stdin)
+ * Returns: Number of bytes loaded, or -1 if program too large
  */
 int load_program(Memory *mem, FILE *input) {
   uint16_t address;
@@ -110,6 +109,7 @@ int load_program(Memory *mem, FILE *input) {
 
   address = 0;
 
+  /* Loop through the program and extract the instructions */
   while ((c = fgetc(input)) != EOF && address < MEMORY_SIZE) {
     mem->data[address] = (uint8_t)c;
     address++;

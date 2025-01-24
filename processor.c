@@ -1,11 +1,9 @@
 #include "svm.h"
 
-/* Maximum valid opcode value */
-#define MAX_OPCODE 0x71
-
 /*
  * Initialize the processor
  * Sets all registers and flags to 0
+ * proc - Pointer to the processor structure
  */
 void init_processor(Processor *proc) {
   proc->data_reg[0] = 0; /* R2 */
@@ -19,20 +17,22 @@ void init_processor(Processor *proc) {
 }
 
 /*
- * Update processor flags based on result
+ * Update processor flags based on operation result
  * Sets Zero flag if result is 0
  * Sets Negative flag if result is negative
- * Sets Overflow flag based on arithmetic operation results
+ * Sets Overflow flag if arithmetic overflow occurred
+ * proc - Pointer to processor structure
+ * result - Result value to check
  */
 void update_flags(Processor *proc, int16_t result) {
   proc->z_flag = (result == 0);
   proc->n_flag = (result < 0);
-  /* Note: Overflow flag (o_flag) is set in the arithmetic operations
-     where we have access to both operands */
 }
 
 /*
  * Verify if opcode is valid
+ * opcode - Opcode to verify
+ * Returns: 1 if opcode is valid, 0 otherwise
  */
 static int is_valid_opcode(uint8_t opcode) {
   if (opcode == HALT)
@@ -43,15 +43,17 @@ static int is_valid_opcode(uint8_t opcode) {
 }
 
 /*
- * Verify if register number is valid
+ * Verify if register number is valid (0-3)
+ * reg - Register to verify
+ * Returns: 1 if register is valid, 0 otherwise
  */
-static int is_valid_register(uint8_t reg) {
-  return reg >= 0 && reg <= 3; /* Valid registers are 0-3 */
-}
+static int is_valid_register(uint8_t reg) { return reg >= 0 && reg <= 3; }
 
 /*
- * Execute a single instruction
+ * Enormous function which executes a single instruction
  * Fetches, decodes and executes one instruction
+ * proc - Pointer ot the processor structure
+ * mem - Pointer to the memory structure
  */
 void execute_instruction(Processor *proc, Memory *mem) {
   uint16_t curr_pc = proc->pc;
@@ -63,6 +65,7 @@ void execute_instruction(Processor *proc, Memory *mem) {
   int16_t old_value;
 
   /* Update PC for next instruction based on instruction type */
+  /* Not very elegant, but it works */
   switch (opcode) {
   case LOAD:
   case STORE:
@@ -94,6 +97,7 @@ void execute_instruction(Processor *proc, Memory *mem) {
     exit(1);
   }
 
+  /* Switch cases for each opcode type */
   switch (opcode) {
   case LOAD:
     immediate = fetch_word(mem, curr_pc + 2);
@@ -276,6 +280,8 @@ void execute_instruction(Processor *proc, Memory *mem) {
 /*
  * Main execution loop
  * Continuously executes instructions until HALT
+ * proc - Pointer to the processor structure
+ * mem - Pointer to the memory structure
  */
 void execute_program(Processor *proc, Memory *mem) {
   while (1) {
